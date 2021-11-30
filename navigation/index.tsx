@@ -19,6 +19,7 @@ import TabThreeScreen from '../screens/TabThreeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import { Calculation, Calculations, calculations } from '../hooks/useMaths';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -57,17 +58,21 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
+  const TabOne = Object.keys(calculations)[0] as keyof Calculations
+  const TabTwo = Object.keys(calculations)[1] as keyof Calculations
+  const TabThree = Object.keys(calculations)[2] as keyof Calculations
+
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName={TabOne}
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
+        name={TabOne}
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
-          title: 'Tab One',
+        options={({ navigation }: RootTabScreenProps<Calculation>) => ({
+          title: TabOne,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           headerRight: () => (
             <View style={{
@@ -102,18 +107,18 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name={TabTwo}
         component={TabTwoScreen}
         options={{
-          title: 'Tab Two',
+          title: TabTwo,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabThree"
+        name={TabThree}
         component={TabThreeScreen}
         options={{
-          title: 'Tab Three',
+          title: TabThree,
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

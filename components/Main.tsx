@@ -2,15 +2,17 @@ import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { MathsProvider } from '../hooks/useMaths'
-
 import Colors from '../constants/Colors';
 import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
+import Answers from './Answers';
+import Controls from './Controls';
 
-export default function EditScreenInfo({ path, calculation }: { path: string, calculation: string }) {
+export default function Main({ path, calculation = '' }: { path: string, calculation?: string }) {
+  const [score, setScore] = React.useState(0)
   return (
     <MathsProvider>
-    <View>
+    <View style={styles.wrapper}>
       <View style={styles.getStartedContainer}>
         <Text
           style={styles.getStartedText}
@@ -27,21 +29,12 @@ export default function EditScreenInfo({ path, calculation }: { path: string, ca
           <MonoText>{calculation}</MonoText>
         </View>
 
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Change any of the text, save the file, and your app will automatically update.
-        </Text>
       </View>
  
 
-      <View style={styles.helpContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-          <Text style={styles.helpLinkText} lightColor={Colors.light.tint}>
-            Tap here if your app doesn't automatically update after making changes
-          </Text>
-        </TouchableOpacity>
+      <View style={styles.answers}>
+        <Controls score={score} />
+        <Answers />
       </View>
     </View>
     </MathsProvider>
@@ -55,6 +48,9 @@ function handleHelpPress() {
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    justifyContent: 'space-between'
+  },
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
@@ -71,10 +67,10 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: 'center',
   },
-  helpContainer: {
+  answers: {
     marginTop: 15,
-    marginHorizontal: 20,
-    alignItems: 'center',
+    marginBottom: 0,
+    alignContent: 'flex-end'
   },
   helpLink: {
     paddingVertical: 15,

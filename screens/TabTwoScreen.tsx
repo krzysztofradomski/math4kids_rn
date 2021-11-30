@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import Main from '../components/Main';
 import { Text, View } from '../components/Themed';
 import { calculations } from '../hooks/useMaths';
 
@@ -9,9 +9,9 @@ export default function TabTwoScreen() {
   const calculation = Object.keys(calculations)[1]
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <Text style={styles.title}>{calculation}</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" calculation={calculation}/>
+      <Main path="/screens/TabTwoScreen.tsx" calculation={calculation}/>
     </View>
   );
 }
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 20,

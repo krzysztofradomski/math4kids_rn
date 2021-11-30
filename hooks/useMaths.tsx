@@ -1,28 +1,41 @@
-import { useEffect, createContext, useContext, useState, Provider, ReactNode } from 'react'
+import { useEffect, createContext, useContext, useState, Provider, ReactNode, Dispatch, SetStateAction } from 'react'
 import { shuffleArray } from '../utils/misc';
 import * as React from 'react';
 
-interface Calculations {
+export type Calculations = {
   add: string
   subtract: string
   multiply: string
   divide: string
 }
 
-type Calculation = keyof typeof calculations;
+export type Calculation = keyof Calculations
 
 export const calculations: Calculations = {
   add: '+',
   subtract: '-',
   multiply: '*',
   divide: '/'
-};
+} as const
 
 interface MathsProps {
   children: ReactNode
 }
 
-const MathsContext = createContext({})
+interface Maths {
+  setCalculation: Dispatch<SetStateAction<keyof Calculations>>
+  calculation: string
+  numbers: number[]
+  dummyAnswers: number[]
+  answer: number
+  setAnswer: Dispatch<SetStateAction<number>>
+  getNewCalculation: () => void
+  setDifficulty: (number: number) => void
+  difficulty: number
+  choices: number[]
+}
+
+const MathsContext = createContext({} as Maths)
 
 function MathsProvider( { children }: MathsProps ) {
   const [seed, setSeed] = useState(20)
@@ -52,7 +65,7 @@ function MathsProvider( { children }: MathsProps ) {
     }
   }, [setCalculation, calculation, trigger, setTrigger, seed])
 
-  const value = {
+  const value: Maths = {
     setCalculation,
     calculation,
     numbers,
