@@ -12,7 +12,7 @@ const Answers = ({ chooseAnswer = () => {}, score }) => {
     <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 5}}>
         <Button  title={score} onPress={() => {}} color={gc()} />
         <Button  title="Reset calculation" onPress={() => getNewCalculation()} color={gc()} />
-        <Button  title="Change difficulty" onPress={() => getNewCalculation()} color={gc()} />
+        <Button  title="Change difficulty" onPress={() => {}} color={gc()} />
     </View>
   )
 }

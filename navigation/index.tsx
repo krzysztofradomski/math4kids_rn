@@ -14,12 +14,13 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabThreeScreen from '../screens/TabThreeScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import AddScreen from '../screens/AddScreen';
+import MultiplyScreen from '../screens/MultiplyScreen';
+import SubtractScreen from '../screens/SubtractScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import { Calculation, Calculations, calculations } from '../hooks/useMaths';
+import DivideScreen from '../screens/DivideScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -58,22 +59,23 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
 
-  const TabOne = Object.keys(calculations)[0] as keyof Calculations
-  const TabTwo = Object.keys(calculations)[1] as keyof Calculations
-  const TabThree = Object.keys(calculations)[2] as keyof Calculations
+  const Add = Object.keys(calculations)[0] as keyof Calculations
+  const Subtract = Object.keys(calculations)[1] as keyof Calculations
+  const Multiply = Object.keys(calculations)[2] as keyof Calculations
+  const Divide = Object.keys(calculations)[3] as keyof Calculations
 
   return (
     <BottomTab.Navigator
-      initialRouteName={TabOne}
+      initialRouteName={Add}
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name={TabOne}
-        component={TabOneScreen}
+        name={Add}
+        component={AddScreen}
         options={({ navigation }: RootTabScreenProps<Calculation>) => ({
-          title: TabOne,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: Add,
+          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
           headerRight: () => (
             <View style={{
               flexDirection: 'row'
@@ -107,19 +109,27 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name={TabTwo}
-        component={TabTwoScreen}
+        name={Subtract}
+        component={SubtractScreen}
         options={{
-          title: TabTwo,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: Subtract,
+          tabBarIcon: ({ color }) => <TabBarIcon name="minus" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name={TabThree}
-        component={TabThreeScreen}
+        name={Multiply}
+        component={MultiplyScreen}
         options={{
-          title: TabThree,
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: Multiply,
+          tabBarIcon: ({ color }) => <TabBarIcon name="asterisk" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name={Divide}
+        component={DivideScreen}
+        options={{
+          title: Divide,
+          tabBarIcon: ({ color }) => <TabBarIcon name="calculator" color={color} />,
         }}
       />
     </BottomTab.Navigator>

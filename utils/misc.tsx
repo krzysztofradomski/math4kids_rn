@@ -7,9 +7,9 @@ export function shuffleArray(array: number[]) {
     return _arr
   }
   
-  const colors: string[] = ['red', 'blue', 'green', 'yellow', 'orange']
+  const colors: string[] = ['#6b5b95', '#feb236', '#d64161', '#ff7b25']
 
-  export function getRandomAccentColor(n: number = 5): string {
+  export function getRandomAccentColor(n: number = 4): string {
     return colors[parseInt(String(Math.random() * n))]
   }
   

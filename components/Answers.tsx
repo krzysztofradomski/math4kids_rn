@@ -14,8 +14,8 @@ const Answers = ({ chooseAnswer = () => {} }) => {
   return (
     <View>
         {choices.map((answer, i) => (
-            <View key={String(answer)} style={{margin:5}}>
-                <Button  title={String(answer)} onPress={() => {}} color={colors[i]} />
+            <View key={String(i) + answer} style={{margin:5}}>
+                <Button title={String(answer)} onPress={() => {}} color={colors[i]} />
             </View>
         ))}
     </View>

@@ -17,17 +17,22 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           add: {
             screens: {
-              TabOneScreen: 'one',
+              AddScreen: 'add',
             },
           },
           subtract: {
             screens: {
-              TabTwoScreen: 'two',
+              SubtractScreen: 'subtract',
             },
           },
           multiply: {
             screens: {
-              TabThreeScreen: 'three',
+              MultiplyScreen: 'multiply',
+            }
+          },
+          divide: {
+            screens: {
+              DivideScreen: 'divide'
             }
           }
         },
