@@ -7,34 +7,34 @@ import { MonoText } from './StyledText';
 import { Text, View } from './Themed';
 import Answers from './Answers';
 import Controls from './Controls';
+import Calculation from './Calculation';
+import { alert } from '../utils/misc';
 
 export default function Main({ path, calculation = '' }: { path: string, calculation?: string }) {
   const [score, setScore] = React.useState(0)
+  const [showAnswer, setShowAnswer] = React.useState(false)
+  const chooseCorrectAnswer = (callback: () => void): void => {
+    setShowAnswer(prev => true);
+    setScore(old => old + 1);
+    alert('Correct answer!');
+    setTimeout(() => {
+      setShowAnswer(prev => false);
+      callback();
+    }, 2000);
+  }
   return (
     <MathsProvider>
     <View style={styles.wrapper}>
       <View style={styles.getStartedContainer}>
-        <Text
-          style={styles.getStartedText}
-          lightColor="rgba(0,0,0,0.8)"
-          darkColor="rgba(255,255,255,0.8)">
-          Open up the code for this screen:
-        </Text>
 
-        <View
-          style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
-          darkColor="rgba(255,255,255,0.05)"
-          lightColor="rgba(0,0,0,0.05)">
-          <MonoText>{path}</MonoText>
-          <MonoText>{calculation}</MonoText>
-        </View>
+      <Calculation showAnswer={showAnswer}/>
 
       </View>
  
 
       <View style={styles.answers}>
         <Controls score={score} />
-        <Answers />
+        <Answers chooseCorrectAnswer={chooseCorrectAnswer} />
       </View>
     </View>
     </MathsProvider>
